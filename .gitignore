@@ -1,0 +1,44 @@
+# Maven target folder
+/target/
+
+# Eclipse files
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA files
+.idea/
+*.iml
+out/
+
+# VSCode files
+.vscode/
+
+# Logs
+*.log
+
+# Spring Boot specific
+spring-boot-app.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Maven Wrapper files (optional to ignore, usually keep them)
+/.mvn/wrapper/maven-wrapper.jar
+/mvnw
+/mvnw.cmd
+
+# Docker files
+docker-compose.override.yml
+
+# Redis dump file (if created locally)
+dump.rdb
+
+# Others
+*.class
+*.jar
+*.war
+
+# Environment variables (if any)
+.env
