@@ -9,6 +9,7 @@ SPRINGBOOT_PORT=8080
 REDIS_PORT=6379
 POSTGRES_PORT=5432
 JAEGER_PORT=16686
+SONARQUBE_PORT=9000
 
 function check_docker() {
   if ! docker info >/dev/null 2>&1; then
@@ -47,16 +48,16 @@ function stop_all() {
   echo "All services stopped."
 }
 
-function show_postgres_logs() {
-  POSTGRES_CONTAINER=$(docker-compose ps -q postgres)
-  if [ -n "$POSTGRES_CONTAINER" ]; then
-    echo "==== Postgres logs ===="
-    docker logs "$POSTGRES_CONTAINER" | tee postgres_start_error.log
-    echo "==== End of Postgres logs ===="
+function show_logs() {
+  local service=$1
+  local container_id=$(docker-compose ps -q "$service")
+  if [ -n "$container_id" ]; then
+    echo "==== Logs for $service ===="
+    docker logs "$container_id" | tail -n 50
+    echo "==== End logs for $service ===="
   fi
 }
 
-# Start script begins here
 check_docker
 
 echo "Starting Jaeger..."
@@ -71,7 +72,16 @@ echo "Starting Postgres..."
 docker-compose up -d postgres
 if ! wait_for_port "Postgres" $POSTGRES_PORT; then
   echo "Postgres failed to start."
-  show_postgres_logs
+  show_logs postgres
+  stop_all
+  exit 1
+fi
+
+echo "Starting SonarQube..."
+docker-compose up -d sonarqube
+if ! wait_for_port "SonarQube" $SONARQUBE_PORT; then
+  echo "SonarQube failed to start."
+  show_logs sonarqube
   stop_all
   exit 1
 fi
@@ -100,9 +110,9 @@ else
   echo "Jaeger UI available at http://localhost:$JAEGER_PORT"
 fi
 
-echo "All services started successfully!"
+echo "✅ All services started successfully!"
 echo "Spring Boot App: http://localhost:$SPRINGBOOT_PORT"
 echo "Jaeger UI:       http://localhost:$JAEGER_PORT"
+echo "SonarQube UI:    http://localhost:$SONARQUBE_PORT"
 
-# Wait for Spring Boot to exit
 wait "$springboot_pid"
