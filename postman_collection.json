@@ -1,0 +1,94 @@
+{
+  "info": {
+    "name": "Java Generic Project API",
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-1234567890ef",
+    "description": "Collection to test all REST endpoints of java-generic-project",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check - Redis",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/health/redis",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["health", "redis"]
+        }
+      }
+    },
+    {
+      "name": "Health Check - Postgres",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/health/postgres",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["health", "postgres"]
+        }
+      }
+    },
+    {
+      "name": "Health Check - Spring Boot",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/health/springboot",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["health", "springboot"]
+        }
+      }
+    },
+    {
+      "name": "Get Customer by ID (Postgres)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/customer/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["customer", "1"]
+        }
+      }
+    },
+    {
+      "name": "Get Address by ID (Postgres)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/address/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["address", "1"]
+        }
+      }
+    },
+    {
+      "name": "Get Customer Data from Redis",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/redis/customer/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["redis", "customer", "1"]
+        }
+      }
+    }
+  ]
+}

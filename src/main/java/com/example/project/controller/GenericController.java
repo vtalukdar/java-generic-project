@@ -21,6 +21,7 @@ public class GenericController {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @SuppressWarnings("all")
     @GetMapping("/redis/{key}")
     public ResponseEntity<String> getFromRedis(@PathVariable String key) {
         Span span = tracer.spanBuilder("redis-get").startSpan();
@@ -35,6 +36,7 @@ public class GenericController {
         }
     }
 
+    @SuppressWarnings("all")
     @GetMapping("/postgres/customer/{id}")
     public ResponseEntity<String> getCustomerFromPostgres(@PathVariable Long id) {
         Span span = tracer.spanBuilder("postgres-get-customer").startSpan();
